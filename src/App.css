@@ -1,5 +1,11 @@
+aside{
+  height: 100vh;
+  padding: auto;
+  display: flex;
+  justify-content: center;
+}
 .login-box{
-  margin: auto;
+  align-self: center;
   font-style: normal;
   /* position: absolute; */
   width: 404px;
@@ -74,5 +80,12 @@ transition: 400ms;
   /* border: #FFFFFF solid;
   color: #FFFFFF; */
   /* background-color: #001F54; */
+}
+
+.login-box p{
+  font-size: 15px;
+  color: palevioletred;
+  cursor: pointer;
+  text-decoration: underline;
 }
 

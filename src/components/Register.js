@@ -1,23 +1,17 @@
 import React from 'react'
-import Register from './Register';
 
-export default function Login() {
+export default function Register() {
   const [isLogin, setIsLogin] = React.useState(true);
-  const [isRegister, setIsRegister] = React.useState(false);
   
-  function loginButton(){
+  function registerButton(){
     setIsLogin(isLogin ? false : true);
     setTimeout(() => {
-      alert("You logged in successfully!")
+      alert("You registered successfully!")
     },250)
   }
-  function toRegisterComponent(){
-    setIsLogin(isLogin ? false : true);
-    setIsRegister(isRegister ? false : true);
-  }
-
+  
   return (
-    <>
+      <>
     {isLogin && (
       <aside>
           <div className='login-box'>
@@ -32,14 +26,12 @@ export default function Login() {
                 <label htmlFor="login-password">Password</label>
                 <input type="password" name='login-password' required />
               </div>
-              <input type="submit" id='login-button' onClick={loginButton} value="Sign in"/>
-              <p onClick={toRegisterComponent}>Not yet Registered?</p>
+              <input type="submit" id='login-button' onClick={registerButton} value="Register"/>
 
           </div>
       </aside>
       )
     }
-    {isRegister && <Register />}
     </>
   )
 }
