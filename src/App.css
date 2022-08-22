@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-box{
+  margin: auto;
+  font-style: normal;
+  /* position: absolute; */
+  width: 404px;
+  height: 478px;
+  /* left: 831px;
+  top: 223px; */
+  background-color: #001F54;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 29px;
+  box-shadow: 0px 4px 17px 5px rgba(0, 0, 0, 0.25);
+  /* border-radius: 50px; */
 }
 
-.App-link {
-  color: #61dafb;
+.login-email{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  /* margin: 30px; */
+  font-size: 18px;
+}
+.login-box input{
+  width: 250px;
+  height: 45px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  padding-left: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.login-heading{
+  margin-bottom: 34px;
+  font-family: 'M PLUS 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-style: normal;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-heading span{
+  font-weight: 10;
+  font-size: 25px;
 }
+
+.login-password{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  font-size: 18px;
+
+}
+
+#login-button{
+width: 150px;
+height: 45px;
+background: #FFFFFF;
+border-radius: 125px;
+font-weight: 400;
+font-size: 20px;
+line-height: 31px;
+text-align: center;
+margin-top: 45px;
+border: none;
+transition: 400ms;
+}
+
+#login-button:hover{
+  box-shadow: 0px 1px 1px 2px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  /* border: #FFFFFF solid;
+  color: #FFFFFF; */
+  /* background-color: #001F54; */
+}
+
