@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from "react-router-dom";
 
 export default function Register() {
   const [isLogin, setIsLogin] = React.useState(true);
@@ -12,7 +13,6 @@ export default function Register() {
   
   return (
       <>
-    {isLogin && (
       <aside>
           <div className='login-box'>
 
@@ -21,17 +21,14 @@ export default function Register() {
                 <label htmlFor="login-email">E-mail</label>
                 <input type="text" name='login-email' required />
               </div>
-
               <div className='login-password'>
                 <label htmlFor="login-password">Password</label>
                 <input type="password" name='login-password' required />
               </div>
               <input type="submit" id='login-button' onClick={registerButton} value="Register"/>
-
+              <Link className='login-link'  to="/">Already a User? Login!</Link>
           </div>
       </aside>
-      )
-    }
     </>
   )
 }
