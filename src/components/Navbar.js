@@ -1,7 +1,13 @@
 import React from 'react'
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
-    <div>Navbar</div>
+    <div>
+      Navbar
+      {props.isLoggedIn &&
+          <p>Welcome, {props.username}!</p>
+        }
+    </div>
+
   )
 }
