@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import MainScreen from './components/MainScreen';
 
+
 class App extends Component {
   constructor(){
     super()
@@ -42,5 +43,7 @@ class App extends Component {
     );
   }
 }
+
+// img error in MainListTile component
 
 export default App;
