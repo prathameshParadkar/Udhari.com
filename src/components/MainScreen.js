@@ -1,22 +1,36 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import MainList from './MainList'
 import Navbar from './Navbar'
 import Workspace from './Workspace'
 import Data from './Data.js'
-
+import Axios from 'axios';
 
 export default function MainScreen(props) {
-  const [isManagerOn, setIsManagerOn] = React.useState(false)
+  const [isManagerOn, setIsManagerOn] = useState(false)
+  const [entries, setEntries] = useState([]);
+
+  const updateEntry = (newEntry) => {
+    setEntries([...entries, newEntry])
+  }
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/${props.username}`)
+      .then(res => {
+        console.log(res.data);
+        setEntries(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }, []);
 
   return (
     <div className='mainscreen-container'>
     <Navbar isLoggedIn={props.isLoggedIn} username={props.username}/>
+
+    <MainList allEntries = {entries} />
     
-    {/* // Data[0] represent the data of the user logged in. Data[1] will be another user */}
-    {/* entry prop here is all entries of user at Data[0] */}
-    <MainList allEntries = {Data[0].entries} />
-    
-    <Workspace isManagerOn={isManagerOn} />
+    <Workspace isManagerOn={isManagerOn} username={props.username} updateEntry={updateEntry}/>
     </div>
   )
 }

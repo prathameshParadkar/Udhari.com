@@ -1,16 +1,16 @@
 import React from 'react'
 import MainListTile from './MainListTile'
-
+import Img from './images/profile-pic.png'
 
 export default function MainList(props) {
   
   const MainListTileElement = props.allEntries.map((item) => {
     return (
       <MainListTile
-      key = {item.entryId}
-      img={item.entryImg}
-      name={item.entryName}
-      UdhariStatus = {item.udhari.entryStatus}
+      key = {item._id}
+      img={Img}
+      name={item.name}
+      UdhariStatus = {item.udhari.status}
       UdhariAmount = {item.udhari.amount}
       />
     )

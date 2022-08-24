@@ -16,6 +16,12 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
+        validate: {
+            validator: function(v) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+            },
+            message: '{VALUE} is not a valid Email ID'
+        },
         required: "Email is required",
         unique: true
     },
@@ -37,22 +43,55 @@ const UserSchema = new Schema({
             url: String, 
             fileName: String  
     },
-    udhari_to_pay: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+    entries: [{
+        name: {
+            type: String,
+            required: true,
+            unique: true
+        },            
+        upi_id: {
+            type: String,
+            validate: {
+                validator: function(v) {
+                    return /[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}/.test(v);
+                },
+                message: "{VALUE} is not a valid UPID ID"
+            },
+            required: "UPI ID is required",
+            unqiue: true
         },
-        amount: {
-            type: Number
-        }
-    }],
-    udhari_to_get: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+        personalDetails: {
+            contact: { 
+                type: Number,
+                validate: {
+                    validator: function(v) {
+                        return /^[0-9]{10}$/.test(v);
+                    },
+                    message: '{VALUE} is not a valid 10 digit number!'
+                }
+            },
+            email: {
+                type: String,
+                validate: {
+                    validator: function(v) {
+                        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+                    },
+                    message: '{VALUE} is not a valid Email ID'
+                }
+            },
+            address: String
         },
-        amount: {
-            type: Number
+        udhari: {
+            status: {
+                type: String,
+                enum: ["Udhari_to_pay", "Udhari_to_get"],
+                required: true
+            },
+            amount: {
+                type: Number,
+                min: 0,
+                required: true
+            }
         }
     }]
 });
