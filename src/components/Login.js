@@ -24,7 +24,7 @@ const loginUser = (e) => {
       })
       .catch(error => {
         console.log(error)
-        setredirectTo("/home"); //ye add kiya tha login ko hatane keliye
+        // setredirectTo("/home"); //ye add kiya tha login ko hatane keliye
       })
   }
 

@@ -23,7 +23,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
+
+        {/* ye add kiya tha login ko hatane keliye */ }
       {/* <Navbar updateUser={this.updateUser} isLoggedIn={this.state.isLoggedIn} username={this.state.username} */}
+        
+        
         <BrowserRouter>
         <Routes>
         <Route
