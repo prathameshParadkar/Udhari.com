@@ -44,10 +44,13 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.get('/:username', async(req, res) => {
+app.get('/:username', async (req, res) => {
     const user = await User.findByUsername(req.params.username);
-    console.log(user);
-    res.send(user.entries);
+    // console.log(user);
+    if(!user){
+        res.send(false);
+    }
+    res.send(user);
 })
 
 app.post('/login', function(req, res, next){
@@ -63,10 +66,10 @@ app.post('/login', function(req, res, next){
 
 app.post('/register', async (req, res, next) => {
     try{
-        console.log(req.body);
+        // console.log(req.body);
         const {username, contact, email, upi_id, password} = req.body;
         const user = new User({username, contact, email, upi_id});
-        console.log(user);
+        // console.log(user);
         const registerUser = await User.register(user, password);
         req.login(registerUser, err => {
             if(err){return next(err)}
@@ -78,44 +81,62 @@ app.post('/register', async (req, res, next) => {
     }
 })
 
-app.put('/:username/udhari_to_pay', validateData, async (req, res, next) => {
+app.put('/:username/udhari_to_pay', validateData, async (req, res) => {
     try{
         if(!req.params.username){
-            res.send("You have been logged out!");
+            return res.send("You have been logged out!");
         }else {
             const {username, contact, email, upi_id, amount} = req.body;
-            const currentUser = await User.findByUsername(req.params.username);
-            await currentUser.updateOne({$push: {
-                entries: {name: username, upi_id: upi_id, 
-                personalDetails: {contact: contact, email: email}, 
-                udhari: {status: "Udhari_to_pay", amount: amount}}}}, function(err){
-                    if(err){next(err)}
-                    return res.send("Added to db");
-                })
+            const currentUser = await User.findOneAndUpdate({username: req.params.username}, {$push: {
+                                entries: {name: username, upi_id: upi_id, 
+                                personalDetails: {contact: contact, email: email}, 
+                                udhari: {status: "Udhari_to_pay", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"})
+            
+            const foundUser = await User.findByUsername(username);
+            // console.log(foundUser);
+            if(foundUser){
+                    foundUser.updateOne({$push: {
+                            entries: {name: currentUser.username, upi_id: currentUser.upi_id, 
+                            personalDetails: {contact: currentUser.contact, email: currentUser.email}, 
+                            udhari: {status: "Udhari_to_get", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"}, function(err){
+                                if(err){console.log(err)}
+                                    // console.log(foundUser);
+                                    return res.send(currentUser.entries.slice(-1));
+                            })
+            }else {
+                res.send(currentUser.entries.slice(-1));
+            }
         }
     }catch(e){
         console.log(e);
     }
 })
 
-app.put('/:username/udhari_to_get', validateData, async (req, res, next) => {
+app.put('/:username/udhari_to_get', validateData, async (req, res) => {
     try{
         if(!req.params.username){
-            res.send("You have been logged out!");
+            return res.send("You have been logged out!");
         }else {
             const {username, contact, email, upi_id, amount} = req.body;
+            const currentUser = await User.findOneAndUpdate({username: req.params.username}, {$push: {
+                                entries: {name: username, upi_id: upi_id, 
+                                personalDetails: {contact: contact, email: email}, 
+                                udhari: {status: "Udhari_to_get", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"})
             const foundUser = await User.findByUsername(username);
+            // console.log(foundUser);
             if(foundUser){
-                console.log(foundUser);
+                    foundUser.updateOne({$push: {
+                            entries: {name: currentUser.username, upi_id: currentUser.upi_id, 
+                            personalDetails: {contact: currentUser.contact, email: currentUser.email}, 
+                            udhari: {status: "Udhari_to_pay", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"}, function(err){
+                                if(err){console.log(err)}
+                                    // console.log(foundUser);
+                                    return res.send(currentUser.entries.slice(-1));
+                            })
+            }else {
+                res.send(currentUser.entries.slice(-1));
             }
-            const currentUser = await User.findByUsername(req.params.username);
-            await currentUser.updateOne({$push: {
-                entries: {name: username, upi_id: upi_id, 
-                personalDetails: {contact: contact, email: email}, 
-                udhari: {status: "Udhari_to_get", amount: amount}}}}, function(err){
-                    if(err){next(err)}
-                    return res.send("Added to db");
-                })
+            
         }
     }catch(e){
         console.log(e);

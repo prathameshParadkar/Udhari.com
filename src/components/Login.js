@@ -31,7 +31,7 @@ export default function Login(props) {
     return ( 
       <>
       <aside>
-          <div className='login-box'>
+          <div className='login-box login-1' style={{width:404, height:530}}>
             <h2 className='login-heading'>Udhari<span>.com</span></h2>
               <div className='login-email'>
                 <label htmlFor="login-email">Username</label>
@@ -42,7 +42,7 @@ export default function Login(props) {
                 <input type="password" name='login-password' onChange={e => {setPassword(e.target.value)}} required />
               </div>
               <input type="submit" id='login-button' onClick={loginUser} value="Log in"/>
-              <Link to="/register">Not a Registered User? Register Now!</Link>
+              <Link className='login-link' to="/register">Not a Registered User? Register Now!</Link>
           </div>
       </aside>
       </>

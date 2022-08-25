@@ -38,8 +38,7 @@ export default function Register(props) {
   return (
       <>
       <aside>
-          <div className='login-box'>
-
+          <div className='login-box' style={{width:450, height:720}}>
             <h2 className='login-heading'>Udhari<span>.com</span></h2>
               <div className='login-email'>
                 <label htmlFor="login-email">Username</label>
@@ -62,7 +61,7 @@ export default function Register(props) {
                 <input type="password" name='login-password'onChange={e => {setPassword(e.target.value)}} required />
               </div>
               <input type="submit" id='login-button' onClick={registerUser} value="Register"/>
-              <Link to="/">Already a User? Login!</Link>
+              <Link className="login-link" to="/">Already a User? Login!</Link>
           </div>
       </aside>
     </>

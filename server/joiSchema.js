@@ -28,6 +28,6 @@ module.exports.udhariSchema = Joi.object({
     email: Joi.string().escapeHTML(),
     contact: Joi.number(),
     upi_id: Joi.string().required().escapeHTML(),
-    amount: Joi.number().min(0).required(),
+    amount: Joi.number().min(1).required(),
     // status: Joi.string().required().escapeHTML()
 })

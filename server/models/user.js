@@ -25,9 +25,6 @@ const UserSchema = new Schema({
         required: "Email is required",
         unique: true
     },
-    address: {
-        type: String,
-    },
     upi_id: {
         type: String,
         validate: {
@@ -47,7 +44,6 @@ const UserSchema = new Schema({
         name: {
             type: String,
             required: true,
-            unique: true
         },            
         upi_id: {
             type: String,
@@ -58,7 +54,6 @@ const UserSchema = new Schema({
                 message: "{VALUE} is not a valid UPID ID"
             },
             required: "UPI ID is required",
-            unqiue: true
         },
         personalDetails: {
             contact: { 
@@ -89,7 +84,7 @@ const UserSchema = new Schema({
             },
             amount: {
                 type: Number,
-                min: 0,
+                min: 1,
                 required: true
             }
         }

@@ -14,11 +14,18 @@ export default function MainListTile(props) {
     backgroundColor : "#F8F8F8",
     borderLeft : 3,
     borderLeftStyle : "solid",
-    borderLeftColor : `${UdhariColor}`
+    borderLeftColor : `${UdhariColor}`,
   }
 
   function divClicked(){
-    setDivStyle((prevState) => selectionDivStyle );
+        //independent turning on of div pending
+        setDivStyle((prevState) => {
+          return(
+            Object.keys(prevState).length === 0 ? selectionDivStyle : {} 
+            );
+          }
+        )
+        Object.keys(divStyle).length === 0 ? props.managerHandler(true) :  props.managerHandler(false)
   } 
 
   return (

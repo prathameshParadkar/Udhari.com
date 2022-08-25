@@ -13,12 +13,11 @@ aside{
   display: flex;
   justify-content: center;
 }
+
 .login-box{
   align-self: center;
   font-style: normal;
   /* position: absolute; */
-  width: 404px;
-  height: 478px;
   /* left: 831px;
   top: 223px; */
   background-color: #001F54;
@@ -49,27 +48,45 @@ aside{
   padding-left: 10px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.login-box div{
+  margin-bottom: 10px;
+}
+
+.login-1 .login-email{
+  margin-top: 20px;
+}
+.login-1 #login-button{
+  margin-top: 50px;
+}
+.login-box .login-password input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .login-heading{
   margin-bottom: 34px;
   font-family: 'M PLUS 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 font-style: normal;
+letter-spacing: 2px;
 }
 
 .login-heading span{
   font-weight: 10;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .login-password{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
   font-size: 18px;
+}
 
+.login-password input{
+  color: #001F54;
 }
 
 #login-button{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 width: 150px;
 height: 45px;
 background: #FFFFFF;
@@ -80,19 +97,19 @@ line-height: 31px;
 text-align: center;
 margin-top: 45px;
 border: none;
-transition: 400ms;
+transition: 250ms;
 }
 
 #login-button:hover{
   box-shadow: 0px 1px 1px 2px rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
-  /* border: #FFFFFF solid;
-  color: #FFFFFF; */
-  /* background-color: #001F54; */
+  border: 1px #FFFFFF solid;
+  color: #FFFFFF;
+  background-color: #001F54;
 }
 
 .login-link{
-  font-size: 17px;
+  font-size: 20px;
   color: rgb(189, 206, 255);
   cursor: pointer;
   text-decoration: underline;
@@ -218,7 +235,9 @@ color: white;
   cursor: pointer;
 }
 .list-tile-img{
-  margin-top: 4px;
+  margin-top: 9px;
+  width:45px ;
+  height: 45px;
 }
 .list-tile-name{
   font-family: 'Kodchasan', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -256,68 +275,185 @@ font-size: 20px;
 }
 .add-Udhari-img{
   width: 150px;
-height: 140px;
+height: 150px;
 margin-top: 25px;
 margin-bottom: 30px;
 }
+
+
+.add-Udhari-form{
+  margin-top: 20px;
+  width: 70%
+}
+
+.add-Udhari-close{
+  margin-top: 0;
+  position: absolute;
+  right: 2%;
+  color: #001F54;
+  top: 18%;
+  border: none;
+  border-radius: 10px;
+  width: 35px;
+  height: 35px;
+  font-size: 30px;
+  background-color: rgba(162, 195, 230, 0.13);
+  cursor: pointer;
+  transition: 250ms;
+}
+.add-Udhari-close:hover{
+  color:white;
+  background-color: rgba(162, 195, 230, 0.5);
+}
+
+
 .add-Udhari-form label{
   color: #001F54;
   font-size: 18px;
+  /* margin-left: 30px; */
 }
 .add-Udhari-form div{
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
-.add-Udhari-form input , .add-Udhari-form textarea{
+.add-Udhari-form input {
   width: 50%;
-  margin-left: 20px;
-  color: #001F54;
+    color: #001F54;
   font-size: 15px;
   border: 2px #001F54 solid;
+  margin-right: 20px;
 }
 
-.add-Udhari-form button{
+.amount-change-box{
+  width: 100%;
+  margin-top: 30px;
+  flex-direction: column;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#amount-change-receive-input{
+  color: #60D394;
+  border: 2px #60D394 solid;
+  width: 40%;
+  height: 20px;
+  margin-left: 20px;
+}
+.amount-change-receive label{
+  color: #60D394;
+  /* font-weight: bold; */
+  font-size: 18px;
+}
+.amount-change-receive span{
+  color: #60D394;
+  font-weight: bolder;
+  font-size: 25px;
   margin-left: 20px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: 300ms;
 }
-.add-Udhari-form button:nth-of-type(1){
-  background-color: #60D394;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: white;
-  font-size: 16px;
-  border:none;
-  padding: 10px;
-  border-radius: 25px;
-}
-.add-Udhari-form button:nth-of-type(1):hover{
-  color: #60D394;
-  background-color: #FFFFFF;
-  box-shadow: 2px 2px 2px 2px rgba(171, 255, 177, 0.25);
 
+.amount-change-box span:hover{
+  color: #001F54;
 }
-.add-Udhari-form button:nth-of-type(2):hover{
+
+#amount-change-payed-input{
   color: #EE6055;
-  background-color: #FFFFFF;
-  box-shadow: 2px 2px 2px 2px rgba(255, 171, 171, 0.25);
-
+  border: 2px #EE6055 solid;
+  width: 40%;
+  height: 20px;
+  margin-left: 41px;
 }
-
-.add-Udhari-form button:nth-of-type(2){
-  background-color: #EE6055;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: white;
-  font-size: 16px;
-  border:none;
-  padding: 10px;
-  border-radius: 25px;
+.amount-change-payed label{
+  color: #EE6055;
+  /* font-weight: bold; */
+  font-size: 18px;
+}
+.amount-change-payed span{
+  color: #EE6055;
+  font-weight: bolder;
+  font-size: 25px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .manage-Udhari-box{
   width: 100%;
   height: 100%;
-  background-color: #FBFBFB;
+  background-color: #F8F8F8;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #001F54;
+  font-size: 18px;
+  font-family: 'Kodchasan',Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.manage-Udhari-img-name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.manage-Udhari-img{
+  width: 90px;
+height: 90px;
+margin-top: 25px;
+}
+
+.manage-Udhari-name{
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.manage-Udhari-status{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.manage-Udhari-status-msg{
+  color: #EE6055;
+  margin-top: 7px;
+  margin-bottom: 0;
+}
+.manage-Udhari-tag{
+  background-color: #EE6055;
+  border-radius: 25px;
+  color: #FFFFFF;
+  font-size: 20px;
+  margin:0;
+  padding: 5px 20px;
+  margin-top: 7px;
+}
+
+.manage-Udhari-personal-details-box{
+  width: 85%;
+  margin-top: 10px;
+}
+
+.manage-Udhari-personal-details{
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 0;
+  border-bottom: 2px #001F54 solid;
+  padding-bottom: 5px;
+}
+
+.manage-Udhari-personal-details-box div{
+  display: flex;
+  justify-content: space-between;
+  margin-left:0 ;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.manage-Udhari-personal-details-box p:nth-of-type(2n){
+  margin-right: 280px;
+}
+.manage-Udhari-personal-details-box p:nth-of-type(n){
+  margin-bottom: 0;
+}
+.manage-Udhari-section{
+  width:85% ;
+  margin-top: 10px;
+}
+.manage-Udhari-section h3{
+  margin-bottom: 0;
 }
