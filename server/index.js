@@ -8,6 +8,7 @@ const User = require("./models/user")
 const cors = require("cors");
 const {validateData} = require("./middleware");
 
+//mongo db cluster password: Malayp
 mongoose.connect("mongodb://localhost:27017/udhari", {
     useNewUrlParser: true, useUnifiedTopology: true
 });
