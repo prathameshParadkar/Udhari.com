@@ -12,13 +12,10 @@ export default function MainList(props) {
       name={item.name}
       UdhariStatus = {item.udhari.status}
       UdhariAmount = {item.udhari.amount}
+      managerHandler = {props.managerStatusHandler}
       />
     )
   })
-
-  
-
-
 
   return (
     <div className='mainlist'>

@@ -9,6 +9,9 @@ export default function MainScreen(props) {
   const [isManagerOn, setIsManagerOn] = useState(false)
   const [entries, setEntries] = useState([]);
 
+  function toManageUdhariWS(feeback){
+    setIsManagerOn(feeback)
+  }
   const updateEntry = (newEntry) => {
     setEntries([...entries, newEntry])
   }
@@ -24,13 +27,14 @@ export default function MainScreen(props) {
       })
   }, []);
 
+
   return (
     <div className='mainscreen-container'>
     <Navbar isLoggedIn={props.isLoggedIn} username={props.username}/>
 
-    <MainList allEntries = {entries} />
+    <MainList allEntries = {entries} managerStatusHandler={toManageUdhariWS} />
     
-    <Workspace isManagerOn={isManagerOn} username={props.username} updateEntry={updateEntry}/>
+    <Workspace managerStatus={isManagerOn} managerStatusHandler={toManageUdhariWS} username={props.username} updateEntry={updateEntry}/>
     </div>
   )
 }
