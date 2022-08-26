@@ -22,10 +22,10 @@ export default function AddUdhariWS(props) {
             Axios.put(`http://localhost:3001/${props.username}/udhari_to_pay`, {username, contact, email, upi_id, amount})
                 .then(res => {     
                     if(typeof res.data === 'object' && res.data !== null){
-                        const {status, amount} = res.data[0].udhari;
-                        const {name, upi_id, _id} = res.data[0];
-                        const {contact, email} = res.data[0].personalDetails;
-                        props.updateEntry({_id, name, upi_id, personalDetails: {email, contact}, udhari: {status, amount}});
+                        // const {status, amount} = res.data[0].udhari;
+                        // const {name, upi_id, _id} = res.data[0];
+                        // const {contact, email} = res.data[0].personalDetails;
+                        props.updateEntry({_id: res.data[0]._id, name: username, upi_id, personalDetails: {email, contact}, udhari: {status: 'Udhari_to_pay', amount}});
                         // console.log({_id, name, upi_id, personalDetails: {email, contact}, udhari: {status, amount}})
                     }
                     else {
@@ -45,10 +45,10 @@ export default function AddUdhariWS(props) {
             Axios.put(`http://localhost:3001/${props.username}/udhari_to_get`, {username, contact, email, upi_id, amount})
             .then(res => {
                 if(typeof res.data === 'object' && res.data !== null){
-                        const {status, amount} = res.data[0].udhari;
-                        const {name, upi_id, _id} = res.data[0];
-                        const {contact, email} = res.data[0].personalDetails;
-                        props.updateEntry({_id, name, upi_id, personalDetails: {email, contact}, udhari: {status, amount}});
+                        // const {status, amount} = res.data[0].udhari;
+                        // const {name, upi_id, _id} = res.data[0];
+                        // const {contact, email} = res.data[0].personalDetails;
+                        props.updateEntry({_id: res.data[0]._id, name: username, upi_id, personalDetails: {email, contact}, udhari: {status: "Udhari_to_get", amount}});
                 }
                 else {
                     alert(`Error: ${res.data}`);

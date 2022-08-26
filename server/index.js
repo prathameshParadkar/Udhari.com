@@ -3,16 +3,17 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('passport-local');
-const mongoose = require("mongoose");
-const User = require("./models/user")
 const cors = require("cors");
-const {validateData} = require("./middleware");
+const mongoose = require("mongoose");
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
+const User = require("./models/user")
 
 //mongo db cluster password: Malayp
+//connecting db
 mongoose.connect("mongodb://localhost:27017/udhari", {
     useNewUrlParser: true, useUnifiedTopology: true
 });
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, "connection error!"));
 db.once('open', () => {
@@ -22,8 +23,8 @@ db.once('open', () => {
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
-// app.use(flash())
 
+//setting up session store
 const sessionOptions = { 
     name: "session",
     secret: "Mysecret", 
@@ -37,114 +38,18 @@ const sessionOptions = {
 }
 app.use(session(sessionOptions));
 
+//initializing and setting up passport(Local Strategy)
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new passportLocal(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//getting routes
+app.use('/', authRoutes);
+app.use('/:username', userRoutes);
 
-app.get('/:username', async (req, res) => {
-    const user = await User.findByUsername(req.params.username);
-    // console.log(user);
-    if(!user){
-        res.send(false);
-    }
-    res.send(user);
-})
-
-app.post('/login', function(req, res, next){
-    passport.authenticate('local', function(err, user) {
-        if (err) { return next(err); }
-        if (!user) { return res.json('Invalid Username or Password'); }
-        req.logIn(user, function(err) {
-            if (err) { return next(err); }
-            return res.send(user);
-        });
-    })(req, res);
-})
-
-app.post('/register', async (req, res, next) => {
-    try{
-        // console.log(req.body);
-        const {username, contact, email, upi_id, password} = req.body;
-        const user = new User({username, contact, email, upi_id});
-        // console.log(user);
-        const registerUser = await User.register(user, password);
-        req.login(registerUser, err => {
-            if(err){return next(err)}
-            res.send(registerUser);
-        })
-    }catch(e){
-        console.log(e);
-        next(e);
-    }
-})
-
-app.put('/:username/udhari_to_pay', validateData, async (req, res) => {
-    try{
-        if(!req.params.username){
-            return res.send("You have been logged out!");
-        }else {
-            const {username, contact, email, upi_id, amount} = req.body;
-            const currentUser = await User.findOneAndUpdate({username: req.params.username}, {$push: {
-                                entries: {name: username, upi_id: upi_id, 
-                                personalDetails: {contact: contact, email: email}, 
-                                udhari: {status: "Udhari_to_pay", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"})
-            
-            const foundUser = await User.findByUsername(username);
-            // console.log(foundUser);
-            if(foundUser){
-                    foundUser.updateOne({$push: {
-                            entries: {name: currentUser.username, upi_id: currentUser.upi_id, 
-                            personalDetails: {contact: currentUser.contact, email: currentUser.email}, 
-                            udhari: {status: "Udhari_to_get", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"}, function(err){
-                                if(err){console.log(err)}
-                                    // console.log(foundUser);
-                                    return res.send(currentUser.entries.slice(-1));
-                            })
-            }else {
-                res.send(currentUser.entries.slice(-1));
-            }
-        }
-    }catch(e){
-        console.log(e);
-    }
-})
-
-app.put('/:username/udhari_to_get', validateData, async (req, res) => {
-    try{
-        if(!req.params.username){
-            return res.send("You have been logged out!");
-        }else {
-            const {username, contact, email, upi_id, amount} = req.body;
-            const currentUser = await User.findOneAndUpdate({username: req.params.username}, {$push: {
-                                entries: {name: username, upi_id: upi_id, 
-                                personalDetails: {contact: contact, email: email}, 
-                                udhari: {status: "Udhari_to_get", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"})
-            const foundUser = await User.findByUsername(username);
-            // console.log(foundUser);
-            if(foundUser){
-                    foundUser.updateOne({$push: {
-                            entries: {name: currentUser.username, upi_id: currentUser.upi_id, 
-                            personalDetails: {contact: currentUser.contact, email: currentUser.email}, 
-                            udhari: {status: "Udhari_to_pay", amount: amount}}}}, {returnOriginal: false, returnDocument: "after"}, function(err){
-                                if(err){console.log(err)}
-                                    // console.log(foundUser);
-                                    return res.send(currentUser.entries.slice(-1));
-                            })
-            }else {
-                res.send(currentUser.entries.slice(-1));
-            }
-            
-        }
-    }catch(e){
-        console.log(e);
-    }
-})
-
-
+//error handling
 app.use((err, req, res, next) => {
     if(err.code && err.code === 11000){
         const field = Object.keys(err.keyValue);
