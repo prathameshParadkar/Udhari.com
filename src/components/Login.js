@@ -31,7 +31,7 @@ export default function Login(props) {
     return ( 
       <>
       <aside>
-          <div className='login-box login-1' style={{width:404, height:530}}>
+          <div className='login-box login-1' >
             <h2 className='login-heading'>Udhari<span>.com</span></h2>
               <div className='login-email'>
                 <label htmlFor="login-email">Username</label>

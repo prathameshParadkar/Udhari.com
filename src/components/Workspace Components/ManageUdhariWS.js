@@ -2,14 +2,25 @@ import React, { useState, useEffect } from 'react'
 import AmountChangeWS from './AmountChangeWS'
 import profileImg from './profile-pic.png' 
 import Axios from "axios";
+import RemoveUdhari from './RemoveUdhari';
 
 export default function ManageUdhariWS(props) {
+  let UdhariMsg = props.UdhariStatus === "Udhari_to_get" ? "Money to be recieved from" : "Money to be payed to"
+  
   function MoneyReceived(){
     //pending
   }
+  
   function MoneyPayed(){
     //pending
   }
+  
+  let UdhariColor = props.UdhariStatus === "Udhari_to_pay" ?"#EE6055" : "#60D394" ;
+  
+  const UdhariStyle = {
+    color : `${UdhariColor}`
+  }
+
   function UdhariClose(){
     props.managerStatusHandler()
   }
@@ -24,8 +35,8 @@ export default function ManageUdhariWS(props) {
       </div>
 
       <div className='manage-Udhari-status'>
-        {props.UdhariStatus === "Udhari_to_get" ? <p className='manage-Udhari-status-msg'>Money to be received from</p> : <p className='manage-Udhari-status-msg'>Money to pay to</p>}
-        <p className='manage-Udhari-tag'>&#8377;{props.UdhariAmount}</p>
+      <p className='manage-Udhari-status-msg' style={UdhariStyle}>{UdhariMsg}</p>
+        <p className='manage-Udhari-tag' style={{ backgroundColor : `${UdhariColor}`}}>&#8377;{props.UdhariAmount}</p>
       </div>
 
       <div className='manage-Udhari-personal-details-box'>
@@ -51,6 +62,9 @@ export default function ManageUdhariWS(props) {
       <div className='manage-Udhari-section'>
         <h3 className='manage-Udhari-personal-details'>Udhari</h3>
       <AmountChangeWS receiveHandler={MoneyReceived} payedHandler={MoneyPayed} />
+      </div>
+      <div>
+        <RemoveUdhari key = {props.removeUdhariKey} name = {props.name} username={props.username} removeEntry={props.removeEntry} />
       </div>
       
     </div>

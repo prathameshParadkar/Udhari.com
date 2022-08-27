@@ -24,12 +24,12 @@ const Data = [
             },
             udhari : {
                 entryStatus : "Udhari_to_pay",
-                amount : 20
+                amount : 100
             }
         },
 
             {
-                id : 2, // this is first user's entry 2
+                entryId : 2, // this is first user's entry 2
                 entryName : "Shoe momo",
                 personalDetails : {
                     contact : "123456891",
@@ -43,7 +43,7 @@ const Data = [
                 }
             },
             {
-                id : 3, // this is first user's entry 3
+                entryId : 3, // this is first user's entry 3
                 entryName : "karen karen",
                 personalDetails : {
                     contact : "123456891",

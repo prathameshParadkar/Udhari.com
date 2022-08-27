@@ -4,7 +4,7 @@ import profileImg from './images/profile-pic.png'
 export default function MainListTile(props) {
 
   const [divStyle, setDivStyle] = React.useState({})
-  let UdhariColor = props.UdhariStatus === "Udhari_to_pay" ? "#60D394" : "#EE6055";
+  let UdhariColor = props.UdhariStatus === "Udhari_to_pay" ? "#EE6055" : "#60D394";
   let UdhariType = props.UdhariStatus === "Udhari_to_pay" ? "pay Udhari" : "get Udhari";
   const UdhariStyle = {
     color : `${UdhariColor}`
@@ -25,7 +25,11 @@ export default function MainListTile(props) {
             );
           }
         )
+        props.manageActiveDiv(props.id)
         Object.keys(divStyle).length === 0 ? props.managerHandler(true) :  props.managerHandler(false)
+  }
+  function divClose(){
+    
   } 
 
   return (
