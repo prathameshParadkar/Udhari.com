@@ -1,12 +1,14 @@
 import './App.css';
 import React, {Component} from "react";
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom'
-import Navbar from './components/Navbar';
 import Login from './components/Login';
-// import Data from './components/Data';
 import Register from './components/Register';
 import MainScreen from './components/MainScreen';
 
+//protect home route
+//email verification
+//poke feature
+//adding profile picture
 
 class App extends Component {
   constructor(){
