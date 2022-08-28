@@ -162,11 +162,19 @@ scrollbar-width: none;
 }
 
 .mainlist{
-  width: 45.76%;
+  width: 45.85%;
   height: 100%;
+}
+.mainlist-list h1{
+  color: #001F54;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: auto;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 .mainlist-list{
   width: 100%;
+  height: 85.48%;
   background-color: #FFFFFF;
   border: 2px #DCDCDC solid;
   box-sizing: border-box;
@@ -174,9 +182,13 @@ scrollbar-width: none;
   overflow:auto;
   scrollbar-width:thin;
 }
+.mainlist-search-box{
+  width: 100%;
+  height: 14.52%;
+}
 .mainlist-search{
   font-family: 'M PLUS 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  margin-top: 58px;
+  margin-top: 45px;
   margin-left: 30px;
   margin-bottom: 35px;
   border-radius: 25px;
@@ -200,7 +212,11 @@ scrollbar-width: none;
 
 .workspace{
   width: 34.94% ;
-  height: inherit;
+  height: 100vh;
+}
+.workspace-addUdhari-box{
+  width: 100%;
+  height: 14.52%;
 }
 .workspace-addUdhari{
   font-family: 'M PLUS 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -213,7 +229,7 @@ color: white;
 border-radius: 10px;
 height: 40px;
 width: 140px;
-margin-top: 58px;
+margin-top: 45px;
 margin-bottom: 31px;
 margin-left: 60%;
 transition: 400ms;
@@ -229,7 +245,7 @@ transition: 400ms;
   width: 100%;
   background-color: #ABABAB;
   box-sizing: border-box;
-  height: 85.5%;
+  height: 85.48%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -476,13 +492,16 @@ margin-top: 25px;
 }
 
 .remove-Udhari-button{
-  font-size: 15px;
-  margin-top: 17px;
+  font-family: 'M PLUS 2', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-style: normal;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 23%;
   background-color: #EE6055;
-  border-radius: 15px;
+  border-radius: 12px;
   border: none;
   color: #FFFFFF;
-  padding: 5px 10px;
+  padding: 7px 15px;
 }
 .remove-Udhari-button:hover{
   background-color: #FFFFFF;
@@ -573,10 +592,10 @@ margin-top: 25px;
     transform: translateX(-100%);
   }
   .nav-slide-in{
-    animation-name: slideIn ;
+    animation-name: NavbarslideIn ;
     animation-duration: 300ms;
   }
-  @keyframes slideIn {
+  @keyframes NavbarslideIn {
     from{
       transform: translateX(-100%);
     }
@@ -599,8 +618,8 @@ margin-top: 25px;
   } 
   .nav-menu-button{
     position: absolute;
-    top: 2.3% ;
-    left: 5%;
+    top: 2.1% ;
+    left: 4.8%;
     font-size: 25px;
     font-weight: 600;
     color: #001F54;
@@ -608,6 +627,10 @@ margin-top: 25px;
     cursor: pointer;
   }
 
+  .mainscreen-container{
+    width: 100vw;
+    height: 100vh;
+  }
   .mainlist{
     width: 100%;
   }
@@ -615,6 +638,168 @@ margin-top: 25px;
     border-left: none;
     border-right: none;
     /* padding: 0 1px; */
+  }
+
+  .mainlist-search-addUdhari-box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    margin-top: 60px;
+    margin-bottom: 35px;
+  }
+  #mainlist-addUdhari{
+    margin: 0;
+    /* margin-left: 10%; */
+    font-size: 15px;
+    padding: 1px;
+    height: 30px;
+    width: 110px;
+  }
+
+  .mainlist-search-addUdhari-box .mainlist-search{
+    font-size: 15px;
+    margin: 0;
+    width: 30%;
+    height: 12px;
+    border: 1px #001F54 solid;
+  }
+  .mainlist-search-addUdhari-box .mainlist-search::placeholder{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 13px;
+  }
+  
+  .list-tile-img{
+    width: 35px;
+    height: 35px;
+  }
+  .list-tile-name{
+    font-size: 17px;
+  }
+  .list-tile-name span{
+    font-size: 10px;
+  }
+  .list-tile-Udhari{
+    font-size: 17px;
+    width: 25%;
+    margin-left: 4px;
+  }
+  .workspace{
+    width: 100%;
+    background-color: #FFFFFF;
+    height: 100vh;
+    
+  }
+  .workspace-slide-out{
+    animation-name: WorkspaceslideOut;
+    animation-duration: 300ms;
+  }
+  @keyframes WorkspaceslideOut{
+    from{
+      transform: translateX(0);
+    }
+    to{
+      transform: translateX(100%);
+    }
+  }
+  .workspace-slide-in{
+    animation-name: WorkspaceslideIn ;
+    animation-duration: 300ms;
+  }
+  @keyframes WorkspaceslideIn {
+    from{
+      transform: translateX(+100%);
+    }
+    to{
+      transform: translateX(0);
+    }
+  }
+  .workspace-box{
+    height: 100%;
+  }
+  .workspace-addUdhari-box{
+    height: 0;
+    width: 0;
+  }
+  .manage-Udhari-box{
+    height: 100%;
+    font-size: 14px;
+  }
+  .manage-Udhari-tag{
+    padding: 5px 15px;
+    font-size: 17px;
+  }
+  .manage-Udhari-personal-details{
+    font-size: 17px;
+  }
+  .amount-change-receive label{
+    font-size: 15px;
+  }
+  .amount-change-receive span{
+    font-size: 20px;
+  }
+  #amount-change-receive-input{
+    width: 30%;
+    height: 15px;
+  }
+  .amount-change-payed label{
+    font-size: 15px;
+  }
+  .amount-change-payed span{
+    font-size: 20px;
+  }
+  #amount-change-payed-input{
+    margin-left: 38px;
+    width: 30%;
+    height: 15px;
+  }
+
+  #mainlist-addUdhari{
+    margin: 0;
+    /* margin-left: 10%; */
+    font-size: 15px;
+    padding: 1px;
+    height: 30px;
+    width: 110px;
+  }
+  .remove-Udhari-button{
+    font-size: 14px;
+    padding: 7px 13px;
+    margin-top: 30%;
+  }
+  .add-Udhari-close{
+    top: 2%;
+    left : 2%;
+    width: 30px;
+    height: 30px;
+    padding: auto;
+    color: #001F54;
+    background-color: rgba(162, 195, 230, 0.13);
+    }
+  .add-Udhari-close:hover{
+    background-color: rgba(162, 195, 230, 0);
+    color:#FFFFFF;
+  }
+  .add-Udhari-form label{
+    color: #001F54;
+    font-size: 15px;
+    margin-left: 10%;
+    
+  }
+  .add-Udhari-form input {
+    width: 40%;
+    font-size: 15px;
+    height: 15px;
+    margin-right: 10%;
+  }
+  .add-Udhari-form{
+    margin-top: 20px;
+    width: 75%
+  }
+  .add-Udhari-amount-change-box{
+    margin-left: 30px;
+    margin-bottom: 0;
+    margin-top: 20px;
   }
   
 
@@ -636,14 +821,13 @@ margin-top: 25px;
 
 
 
-
 }
 
-@media (height > 1000px) {
+/* @media (height > 1000px) {
   .mainlist-list{
     height: 91%;
   }
   .workspace{
     height: 107%;
   }
-}
+} */

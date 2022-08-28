@@ -13,7 +13,9 @@ export default function MainScreen(props) {
   const [entries, setEntries] = useState([]);
   const [filtered, setFilteredEntry] = useState(entries);
   const [activeDiv, setActiveDiv] = useState(0);
-  
+  const [isDivClose, setIsDivClose] = useState(false)
+  const [isAdded, setIsAdded] = React.useState(true);
+
   //responsive for mobile...->
   const [isResponsive, setIsResponsive] = useState(false);
   const [isResponsiveNavbarOn, setIsResponsiveNavbarOn] = useState(false);
@@ -37,7 +39,6 @@ export default function MainScreen(props) {
     setIsResponsiveNavbarOn(true);
 
   }
-
 
 
   function toManageUdhariWS(feeback){
@@ -74,29 +75,60 @@ export default function MainScreen(props) {
     if(!query){
       setEntries(filtered);
     }
-  }  
+  } 
+  function toAddUdhariWS(){
+    setIsAdded(false)
+    setIsResponsiveMainListOn(false)
+    setIsResponsiveWorkspaceOn(true)
+  } 
 
   return (
     <div className='mainscreen-container'>
+    
+    
     { ((isResponsiveNavbarOn) || !isResponsive)  &&  <Navbar isLoggedIn={props.isLoggedIn} username={props.username} isResponsiveNavbarOn = {isResponsiveNavbarOn} responsiveNavbarHandler ={setIsResponsiveNavbarOn} responsiveMainListHandler ={setIsResponsiveMainListOn} />}
-    {((isResponsiveMainListOn) || !isResponsive) && (<div className='mainlist'>
-    {isResponsive && <span onClick={toResponsiveNavbar} className="material-symbols-outlined nav-menu-button"> menu</span>}
+    
+    
+    {((isResponsiveMainListOn) || !isResponsive) && 
+    (<div className='mainlist'>
+    {isResponsive && 
+    <>
+    <span onClick={toResponsiveNavbar} className="material-symbols-outlined nav-menu-button"> menu</span>
+    <div className='mainlist-search-addUdhari-box'>
     <input type="text" name="search" className='mainlist-search' placeholder='Search' onChange={searchUdhari}/>
-    <div className='mainlist-list'>
+    
+    <button className='workspace-addUdhari' onClick = {toAddUdhariWS} id='mainlist-addUdhari'>Add Udhari</button>
+    
+    </div>
+    </>
+    }
+    {!isResponsive && 
+    <div className='mainlist-search-box'>
+    <input type="text" name="search" className='mainlist-search' placeholder='Search' onChange={searchUdhari}/> 
+    </div>
+    }
+        <div className='mainlist-list'>
           {entries && entries.length > 0 ? entries.map((item) => {
                   return (
                     <>
                 <MainListTile
                       key = {item._id}
                       img={Img}
+                      id = {item._id}
                       name={item.name}
                       UdhariStatus = {item.udhari.status}
                       UdhariAmount = {item.udhari.amount}
                       managerHandler = {toManageUdhariWS}
                       manageActiveDiv = {setActiveDiv}
+                      
+                      isDivClose = {isDivClose}
+                      divCloseHandler = {setIsDivClose}
+                      isResponsive = {isResponsive}
+                      responsiveMainListHandler = {setIsResponsiveMainListOn}
+                      responsiveWorkspaceHandler = {setIsResponsiveWorkspaceOn}
                       /> 
                   </>
-                    )}) : <h1>No result found</h1>}
+                    )}) : <h1>No entries found. Please Add Udhari.</h1>}
     </div>
     </div>)}
   { ((isResponsiveWorkspaceOn) || !isResponsive) && 
@@ -107,9 +139,15 @@ export default function MainScreen(props) {
           username={props.username} 
           updateEntry={updateEntry} 
           entries={entries} 
-          activeDiv = {activeDiv}         
+          activeDiv = {activeDiv}  
+          divCloseHandler = {setIsDivClose}       
           removeEntry={removeEntry}
           
+          isResponsive = {isResponsive}
+          responsiveWorkspaceHandler = {setIsResponsiveWorkspaceOn}
+          responsiveMainListHandler = {setIsResponsiveMainListOn}
+          isAdded = {isAdded}
+          isAddedHandler = {setIsAdded}
          />}    
       </div>
   )
