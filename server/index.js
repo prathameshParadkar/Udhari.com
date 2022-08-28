@@ -5,15 +5,17 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const cors = require("cors");
 const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const User = require("./models/user")
+// const dbUrl = process.env.DB_URL
 
-//mongo db cluster password: Malayp
-//connecting db
-mongoose.connect("mongodb://localhost:27017/udhari", {
+//connecting db(MongoDB cloud services)
+mongoose.connect("mongodb+srv://MalayPhadke:Malayp@cluster0.ilttwif.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true, useUnifiedTopology: true
 });
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, "connection error!"));
 db.once('open', () => {
@@ -25,6 +27,16 @@ app.use(express.json())
 app.use(cors())
 
 //setting up session store
+// const store = new MongoStore({
+//     mongoUrl: dbUrl,
+//     secret: "Mysecret",
+//     touchAfter: 24*3600
+// });
+
+// store.on("error", function(e){
+//     console.log("Session store error", e);
+// })
+
 const sessionOptions = { 
     name: "session",
     secret: "Mysecret", 
