@@ -61,7 +61,16 @@ export default function AddUdhariWS(props) {
     }
 
     function UdhariClose(){
-        props.addStatusHandler()
+        props.toResponsiveMainScreen()
+        if(props.isResponsive){
+            setTimeout(() => {
+                props.addStatusHandler()
+            }, 250)
+          }
+          else{
+            props.addStatusHandler()
+          }
+        
     }
 
     const findUser = (username) => {
@@ -95,7 +104,9 @@ export default function AddUdhariWS(props) {
 
     return (
         <>
-        <button className='add-Udhari-close' onClick={UdhariClose}>&#xd7;</button>
+        {!props.isResponsive && <button className='add-Udhari-close' onClick={UdhariClose}>&#xd7;</button>}  
+        {props.isResponsive && <span className="material-symbols-outlined add-Udhari-close" onClick={UdhariClose}>chevron_right</span> }
+        
         <div className='add-Udhari-box'>
             <img className='add-Udhari-img' src={profileImg} alt="" />
             <form className='add-Udhari-form' action="/ManageUdhariWS">
@@ -116,7 +127,7 @@ export default function AddUdhariWS(props) {
                     <input type="text" className="form-control" id="exampleFormControlInput4" onChange={e => {setUpi_id(e.target.value)}} value={upi_id || ""} required/>
                 </div>
             </form>
-            <div>
+            <div className='add-Udhari-amount-change-box'>
                 <AmountChangeWS updateAmount={updateAmount} receiveHandler={MoneyReceived} payedHandler={MoneyPayed} />
             </div>
         </div>

@@ -2,8 +2,8 @@ import React from 'react'
 import profileImg from './images/profile-pic.png'
 
 export default function MainListTile(props) {
-
   const [divStyle, setDivStyle] = React.useState({})
+  const [isDivOn, setIsDivOn] = React.useState(false)
   let UdhariColor = props.UdhariStatus === "Udhari_to_pay" ? "#EE6055" : "#60D394";
   let UdhariType = props.UdhariStatus === "Udhari_to_pay" ? "pay Udhari" : "get Udhari";
   const UdhariStyle = {
@@ -18,19 +18,35 @@ export default function MainListTile(props) {
   }
 
   function divClicked(){
-        //independent turning on of div pending
+      if(!props.isResponsive){
+
         setDivStyle((prevState) => {
           return(
             Object.keys(prevState).length === 0 ? selectionDivStyle : {} 
             );
           }
-        )
+          )
+      }
+      else{
+        props.responsiveMainListHandler(false)
+        props.responsiveWorkspaceHandler(true)
+      }
+          setIsDivOn(true)
         props.manageActiveDiv(props.id)
         Object.keys(divStyle).length === 0 ? props.managerHandler(true) :  props.managerHandler(false)
   }
-  function divClose(){
-    
-  } 
+  
+  React.useEffect(() => {
+    if (props.isDivClose || isDivOn){
+      setDivStyle((prevState) => {
+        return(
+           {} 
+          );
+        } 
+      )
+      props.divCloseHandler(false)
+    }
+  }, [props.isDivClose])
 
   return (
     <div className='list-tile' onClick={divClicked} style={divStyle} >

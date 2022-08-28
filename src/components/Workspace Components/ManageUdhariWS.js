@@ -43,11 +43,22 @@ export default function ManageUdhariWS(props) {
   }
 
   function UdhariClose(){
-    props.managerStatusHandler()
+    props.divCloseHandler(true)
+    props.toResponsiveMainScreen()
+    if(props.isResponsive){
+      setTimeout(() => {
+        props.managerStatusHandler()
+      }, 250)
+    }
+    else{
+      props.managerStatusHandler()
+    }
   }
   return (
     <>
-    <button className='add-Udhari-close' onClick={UdhariClose}>&#xd7;</button>
+    {!props.isResponsive && <button className='add-Udhari-close' onClick={UdhariClose}>&#xd7;</button>}    
+
+    {props.isResponsive && <span className="material-symbols-outlined add-Udhari-close" onClick={UdhariClose}>chevron_right</span> }
     <div className='manage-Udhari-box'>
 
       <div className='manage-Udhari-img-name'>
@@ -85,7 +96,7 @@ export default function ManageUdhariWS(props) {
       <AmountChangeWS receiveHandler={MoneyReceived} payedHandler={MoneyPayed} updateAmount={updateAmount}/>
       </div>
       <div>
-        <RemoveUdhari key = {props.removeUdhariKey} name = {props.name} username={props.username} removeEntry={props.removeEntry} />
+        <RemoveUdhari key = {props.removeUdhariKey} name = {props.name} username={props.username} removeEntry={props.removeEntry} UdhariClose = {UdhariClose} />
       </div>
       
     </div>
