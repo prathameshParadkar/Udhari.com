@@ -38,7 +38,7 @@ export default function Register(props) {
   return (
       <>
       <aside>
-          <div className='login-box' style={{width:450, height:720}}>
+          <div className='login-box register-1'>
             <h2 className='login-heading'>Udhari<span>.com</span></h2>
               <div className='login-email'>
                 <label htmlFor="login-email">Username</label>

@@ -19,21 +19,36 @@ export default function Workspace(props) {
       <button className='workspace-addUdhari' onClick={toAddUdhariWS}>Add Udhari</button>
       <div className='workspace-box'>
       {isAdded && !props.managerStatus && <p>Workspace</p>}
-      {!isAdded && <AddUdhariWS addStatusHandler = {toAddUdhariWS} username={props.username} updateEntry={props.updateEntry}/>}
-      {props.entries && props.entries.length > 0 && props.managerStatus && props.entries.map((item) => {
+      {!isAdded && !props.managerStatus && <AddUdhariWS addStatusHandler = {toAddUdhariWS} username={props.username} updateEntry={props.updateEntry}/>}
+      { props.entries && props.entries.length > 0 && props.managerStatus && props.entries.map((item) => {
+              let isActiveDiv;
+              isActiveDiv = (item._id === props.activeDiv) ? true : false; 
               return (
-                <ManageUdhariWS 
+                <>
+                { isActiveDiv && 
+                (<ManageUdhariWS 
                 key = {item._id}
-                img={Img}
                 name={item.name}
+                
+                img={Img}
                 upi_id = {item.upi_id}
                 UdhariStatus = {item.udhari.status}
                 UdhariAmount = {item.udhari.amount}
                 contact = {item.personalDetails.contact}
                 email = {item.personalDetails.email}
-                managerStatusHandler={toManageUdhariWS} />
+                managerStatusHandler={toManageUdhariWS}
+                
+                username={props.username}
+                removeEntry ={props.removeEntry}
+                updateEntry={props.updateEntry}
+                manageEntry={props.manageEntry}
+                removeUdhariKey = {item.entryId + "key"}
+                />)}
+                </>
               )
-            })}
+            }
+            )
+          }
       </div>
     </div>
     </>

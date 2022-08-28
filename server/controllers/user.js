@@ -4,7 +4,7 @@ module.exports.userData = async (req, res) => {
     const user = await User.findByUsername(req.params.username);
     // console.log(user);
     if(!user){
-        res.send(false);
+        return res.send(false);
     }
     res.send(user);
 }
@@ -71,17 +71,53 @@ module.exports.udhariToGet = async (req, res) => {
     }
 }
 
-module.exports.manageUdhari = (req, res) => {
+const toggleStatus = (status) => {
+    if(status === "Udhari_to_pay"){
+        return "Udhari_to_get";
+    }else {
+        return "Udhari_to_pay";
+    }
+}
+
+module.exports.manageUdhari =  (req, res) => {
     User.findOne({username: req.params.username, "entries.name":  req.body.name})
-        .then(doc => {
+        .then( async (doc) => {
             const entry = doc.entries.find(val => val.name === req.body.name);
+            const foundUser = await User.findOne({username: req.body.name});
+            let result= {removedFromUser: false};
+            if(foundUser){
+                const foundEntry = foundUser.entries.find(val => val.name === req.params.username);
+                if(foundEntry.udhari.status !== req.body.status){
+                    foundEntry.udhari.amount += req.body.amount;
+                }
+                else{
+                    if(req.body.amount>foundEntry.udhari.amount){
+                        foundEntry.udhari.status = toggleStatus(foundEntry.udhari.status);
+                        foundEntry.udhari.amount = req.body.amount - foundEntry.udhari.amount;
+                    }else if(req.body.amount<foundEntry.udhari.amount){
+                        foundEntry.udhari.amount -= req.body.amount;
+                    }else {
+                        foundUser.entries.remove(foundEntry);
+                    }
+                }
+                result.foundEntry = foundEntry;
+                foundUser.save();
+            }
             if(entry.udhari.status === req.body.status){
                 entry.udhari.amount += req.body.amount;
             }else{
-
+                if(req.body.amount>entry.udhari.amount){
+                    entry.udhari.status = toggleStatus(entry.udhari.status);
+                    entry.udhari.amount = req.body.amount - entry.udhari.amount;
+                }else if(req.body.amount<entry.udhari.amount){
+                    entry.udhari.amount -= req.body.amount;
+                }else {
+                    doc.entries.remove(entry);
+                    result.removedFromUser = true;
+                }
             }
             doc.save();
-            res.send(entry);
+            res.send({"result": result, "entry": entry});
         })
         .catch(err => {
             res.send(err);

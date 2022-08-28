@@ -22,6 +22,7 @@ class App extends Component {
   updateUser (userObject) {
     this.setState(userObject)
   }
+  
   render() {
     return (
       <div className="App"> 

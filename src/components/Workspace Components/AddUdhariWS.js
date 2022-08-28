@@ -71,7 +71,7 @@ export default function AddUdhariWS(props) {
                     // alert("user found");
                     // console.log(res.data);
                     const {username, upi_id, contact, email} = res.data;
-                    console.log({username, upi_id, contact, email});
+                    // console.log({username, upi_id, contact, email});
                     setContact(contact);
                     setEmail(email);
                     setUpi_id(upi_id);
