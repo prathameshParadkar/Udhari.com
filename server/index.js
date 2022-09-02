@@ -12,7 +12,7 @@ const User = require("./models/user")
 // const dbUrl = process.env.DB_URL
 
 //connecting db(MongoDB cloud services)
-mongoose.connect("mongodb+srv://MalayPhadke:Malayp@cluster0.ilttwif.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://<your username>:<your password>@cluster0.ilttwif.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true, useUnifiedTopology: true
 });
 
