@@ -94,7 +94,16 @@ export default function MainScreen(props) {
     setIsResponsiveMainListOn(false)
     setIsResponsiveWorkspaceOn(true)
   } 
+  function Redirect(){
+    useEffect(() => {
+      navigate("/");
+    })
+  }
 
+  if(!props.isLoggedIn){
+    alert("Need to be LoggedIn");
+    Redirect();
+  }else{
   return (
     <div className='mainscreen-container'>
     
@@ -169,6 +178,7 @@ export default function MainScreen(props) {
          />}    
       </div>
   )
+  }
 }
 
 //key = {item._id + "key"} 
